@@ -9,10 +9,14 @@ import sharp from 'sharp' // sharp-import
 import { fileURLToPath } from 'url'
 
 import { defaultLexical } from '@/fields/defaultLexical'
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import { Cars } from './collections/Cars'
 import { Categories } from './collections/Categories'
+import { Manufacturers } from './collections/Manufacturers'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Products } from './collections/Products'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
@@ -55,12 +59,73 @@ export default buildConfig({
       ],
     },
   },
-  // This config helps us configure global or default features that the other editors can inherit
-  editor: defaultLexical,
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      BlocksFeature({
+        blocks: [
+          {
+            slug: 'carHighlight',
+            fields: [
+              {
+                name: 'car',
+                type: 'relationship',
+                relationTo: 'cars',
+              },
+              {
+                name: 'type',
+                type: 'radio',
+                defaultValue: 'image',
+                options: [
+                  {
+                    label: 'Image',
+                    value: 'image',
+                  },
+                  {
+                    label: 'Video',
+                    value: 'video',
+                  },
+                ],
+              },
+              {
+                name: 'description',
+                type: 'richText',
+                label: 'Description',
+                editor: defaultLexical,
+              },
+            ],
+          },
+        ],
+        inlineBlocks: [
+          {
+            slug: 'carPice',
+            admin: {
+              components: {
+                Label: './components/ui/CarPriceLabel',
+              },
+            },
+            fields: [
+              {
+                name: 'car',
+                type: 'relationship',
+                relationTo: 'cars',
+              },
+              {
+                name: 'description',
+                type: 'richText',
+                label: 'Description',
+                editor: defaultLexical,
+              },
+            ],
+          },
+        ],
+      }),
+    ],
+  }),
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Pages, Posts, Media, Manufacturers, Categories, Users, Products, Cars],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
