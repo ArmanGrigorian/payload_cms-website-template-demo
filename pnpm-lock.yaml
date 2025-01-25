@@ -38,6 +38,9 @@ importers:
       '@payloadcms/richtext-lexical':
         specifier: latest
         version: 3.19.0(7324pcgm65nnt3bf3ygqs6roqe)
+      '@payloadcms/translations':
+        specifier: ^3.19.0
+        version: 3.19.0
       '@payloadcms/ui':
         specifier: latest
         version: 3.19.0(@types/react@19.0.7)(monaco-editor@0.52.2)(next@15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.19.0(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
