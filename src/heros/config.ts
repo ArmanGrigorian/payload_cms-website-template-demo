@@ -24,16 +24,12 @@ export const hero: Field = {
           value: 'none',
         },
         {
+          label: 'Default Hero',
+          value: 'defaultHero',
+        },
+        {
           label: 'High Impact',
           value: 'highImpact',
-        },
-        {
-          label: 'Medium Impact',
-          value: 'mediumImpact',
-        },
-        {
-          label: 'Low Impact',
-          value: 'lowImpact',
         },
       ],
       required: true,
